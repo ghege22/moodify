@@ -1,37 +1,19 @@
 name: Flutter Build CI
-
-# 1. Kapan pipeline ini berjalan?
 on:
   push:
-    branches: [ main ] # Jalankan saat ada push ke branch main
-  pull_request:
     branches: [ main ]
-
-# 2. Apa yang harus dilakukan?
 jobs:
-  build_and_test:
-    runs-on: ubuntu-latest # Menggunakan server Linux milik GitHub
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4 # Mengambil kode dari repo
-
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Run Tests
-        run: flutter test
-
-      - name: Build APK
-        run: flutter build apk --release
+      - run: flutter pub get
+      - run: flutter build apk --release
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Moodify-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
