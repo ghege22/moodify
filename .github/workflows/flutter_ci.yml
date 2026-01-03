@@ -1,0 +1,37 @@
+name: Flutter Build CI
+
+# 1. Kapan pipeline ini berjalan?
+on:
+  push:
+    branches: [ main ] # Jalankan saat ada push ke branch main
+  pull_request:
+    branches: [ main ]
+
+# 2. Apa yang harus dilakukan?
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest # Menggunakan server Linux milik GitHub
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Mengambil kode dari repo
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
+      - name: Build APK
+        run: flutter build apk --release
