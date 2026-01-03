@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.2.3
 
-  # FIREBASE (Hanya satu kali deklarasi)
+  # FIREBASE
   firebase_core: ^3.10.1
   cloud_firestore: ^5.6.2
   intl: ^0.20.2
@@ -24,26 +24,24 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 
-  # ICON APLIKASI
-
   # SPLASH SCREEN
   flutter_native_splash: ^2.4.0
 
 flutter:
   uses-material-design: true
 
-  assets:
-    - assets/icon/logoh.png
+# Bagian assets, launcher icons, dan splash screen image dimatikan (comment) 
+# agar build CI/CD tidak mencari file logoh.png yang belum di-upload.
+# assets:
+#   - assets/icon/logoh.png
 
-# KONFIGURASI ICON APLIKASI
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: "assets/icon/logoh.png"
+# flutter_launcher_icons:
+#   android: true
+#   ios: true
+#   image_path: "assets/icon/logoh.png"
 
-# KONFIGURASI SPLASH SCREEN
-flutter_native_splash:
-  color: "#F5FBF7"
-  image: "assets/icon/logoh.png"
-  android: true
-  ios: true
+# flutter_native_splash:
+#   color: "#F5FBF7"
+#   image: "assets/icon/logoh.png"
+#   android: true
+#   ios: true
